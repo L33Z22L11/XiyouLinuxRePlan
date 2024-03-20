@@ -1,0 +1,2069 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://plan.xiyoulinux.com/project/strbuf/">
+      
+      
+        <link rel="prev" href="../shell/">
+      
+      
+        <link rel="next" href="../synchronize/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.14">
+    
+    
+      
+        <title>Strbuf - 西邮Linux兴趣小组培养计划</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.10ba22f1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#c" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="西邮Linux兴趣小组培养计划" class="md-header__button md-logo" aria-label="西邮Linux兴趣小组培养计划" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            西邮Linux兴趣小组培养计划
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Strbuf
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/xiyou-linuxer/Plan" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    xiyou-linuxer/Plan
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="西邮Linux兴趣小组培养计划" class="md-nav__button md-logo" aria-label="西邮Linux兴趣小组培养计划" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    西邮Linux兴趣小组培养计划
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/xiyou-linuxer/Plan" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    xiyou-linuxer/Plan
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    概述
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribute/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    贡献者指南
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Plan
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Plan
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plan/plan0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0 - 你好, Linux Newbie
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plan/plan1-c-begin/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1 - C 语言基础 / Linux 入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plan/plan2-strbuf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 - C 语言编写简单 Lab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plan/plan3-ls/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 - Linux 目录操作
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plan/plan4-shell/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 - Linux 进程通信
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plan/plan5-thread/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5 - Linux 线程同步
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plan/plan6-network/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6 - Linux 网络通信
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plan/plan7-chatroom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7 - 一个 ChatRoom
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plan/plan8-server/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8 - Server 后续学习
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plan/simple-thread-pool-challenge/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Challenge: 线程池
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Preparation
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Preparation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparation/blog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    博客与 Markdown
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparation/command-line/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Shell 与命令行
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparation/data-structure-algorithm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数据结构与算法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparation/database/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    数据库
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparation/distributed-systems/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    分布式系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparation/git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git的使用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparation/language-c/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C 语言基础入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparation/language-comparison/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    流行语言的比较
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparation/languages/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    语言学习
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparation/linux-network-programming/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux 网络编程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparation/linux-system-programming/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux 系统编程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparation/os/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    操作系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Project
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Project
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c-basic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C 语言基础任务
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../command-line/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Shell 与命令行
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cpp-list-stl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C++ List STL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-struct-java/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java常见数据结构
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hashtable-c/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C 语言哈希表
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../huffman-tree/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    哈夫曼压缩
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ls/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    实现自己的 ls 命令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plan-net/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    搞明白网络!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../priority-queue/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    优先队列
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shell/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    实现自己的 shell
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Strbuf
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Strbuf
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计一个 C 语言的动态扩容缓冲区
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="设计一个 C 语言的动态扩容缓冲区">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      知识要点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      介绍
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hint" class="md-nav__link">
+    <span class="md-ellipsis">
+      HINT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-2a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 2A
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2A">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task" class="md-nav__link">
+    <span class="md-ellipsis">
+      TASK
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-2b" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 2B
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2B">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      TASK
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-2c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 2C
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      TASK
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-2d" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 2D
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2D">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      TASK
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      无信用挑战练习
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="无信用挑战练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      CHALLENGE
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../synchronize/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Synchronize
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../thread/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tasks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_15" id="__nav_5_15_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Java
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_15">
+            <span class="md-nav__icon md-icon"></span>
+            Java
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java/MultiThreading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MultiThreading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_16" id="__nav_5_16_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Sophomore project
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_16">
+            <span class="md-nav__icon md-icon"></span>
+            Sophomore project
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sophomore-project/lab1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lab1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计一个 C 语言的动态扩容缓冲区
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="设计一个 C 语言的动态扩容缓冲区">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      知识要点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      介绍
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hint" class="md-nav__link">
+    <span class="md-ellipsis">
+      HINT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-2a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 2A
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2A">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task" class="md-nav__link">
+    <span class="md-ellipsis">
+      TASK
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-2b" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 2B
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2B">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      TASK
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-2c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 2C
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      TASK
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-2d" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 2D
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2D">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      TASK
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      无信用挑战练习
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="无信用挑战练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      CHALLENGE
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Strbuf</h1>
+
+<h3 id="c">设计一个 C 语言的动态扩容缓冲区</h3>
+<h4 id="_1">知识要点</h4>
+<ol>
+<li>字符串。</li>
+<li>面向对象的 C 语言设计。</li>
+<li>动态内存分配。</li>
+<li>Linux File API。</li>
+<li>getline。</li>
+</ol>
+<h4 id="_2">介绍</h4>
+<p>如果同学们了解过 C++ | Java | Golang | Python 的字符串的话，应该知道它们的字符串是可以动态扩容的，见下图 C++ 代码 ：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// strbuf_test.cpp</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">str</span><span class="p">(</span><span class="s">&quot;xiyou&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot;linux&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">str</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span><span class="w"> </span><span class="c1">// xiyoulinux</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>我们来编译运行一下：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>g++<span class="w"> </span>strbuf_test.cpp<span class="w"> </span>-o<span class="w"> </span>./strbuf_test
+$<span class="w"> </span>./strbuf_test
+xiyoulinux
+</code></pre></div>
+<p>成功输出 <code>xiyoulinux</code>，啊，这就邪恶的 C++ 施展的黑魔法么？</p>
+<p>对比 c 语言版本：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// strbuf_test.c</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">str</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;xiyou&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">strcat</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;linux&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">str</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>我们来编译运行一下：</p>
+<div class="highlight"><pre><span></span><code>$ gcc strbuf_test.c -o ./strbuf_test
+$ ./strbuf_test
+xiyoulinux
+*** stack smashing detected ***: terminated
+[1]    1117368 abort (core dumped)  ./strbuf_test
+</code></pre></div>
+<p>然而....可恶！吾可爱的栈竟然被粉碎了！！！这是为何？</p>
+<p>使用一个 c 语言字符数组似乎不可避免的存放不下一个不确定长度的字符串，你开长度为 11，我也许就想要存长度为 20 的字符串。所以你又有新的方法：<code>malloc</code> + <code>realloc</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// strbuf_test2.c</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+<span class="w">  </span><span class="n">memcpy</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;xiyou&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<span class="w">  </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">realloc</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="s">&quot;linux&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="n">str</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;linux&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">str</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>gcc<span class="w"> </span>strbuf_test2.c<span class="w"> </span>-o<span class="w"> </span>./strbuf_test2
+$<span class="w"> </span>./strbuf_test2
+xiyoulinux
+</code></pre></div>
+<p>是的，这次我们成功输出了 <code>xiyoulinux</code>！</p>
+<p>但是，上面我们硬编码了字符串长度, 我们可不可以将它包装成一个统一的函数去做到这一件事情呢？</p>
+<p>事实上，在很多优秀项目都会去封装这样的一种接口，如 <a href="https://github.com/redis/redis/blob/unstable/src/sds.c">redis</a>,<a href="https://github.com/git/git/blob/master/strbuf.c">git</a>。现在你的目标是重新造一遍在轮子（belong to you!）：</p>
+<p>这个缓冲区类的定义就免费送给你们啦：</p>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">strbuf</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">len</span><span class="p">;</span><span class="w">     </span><span class="c1">//当前缓冲区（字符串）长度</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">alloc</span><span class="p">;</span><span class="w">   </span><span class="c1">//当前缓冲区（字符串）容量</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">;</span><span class="w">   </span><span class="c1">//缓冲区（字符串）</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>有了 <code>strbuf</code>，意味着我们就可以进行以下的字符串操作了：</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">strbuf</span><span class="w"> </span><span class="n">sb</span><span class="p">;</span>
+<span class="w">  </span><span class="n">strbuf_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sb</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">  </span><span class="n">strbuf_attach</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sb</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;xiyou&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">  </span><span class="n">assert</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">sb</span><span class="p">.</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;xiyou&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="n">strbuf_addstr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sb</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;linux&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">assert</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">sb</span><span class="p">.</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;xiyoulinux&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="n">strbuf_release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sb</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>你需要做的，就是实现 <code>strbuf</code> 的这些操作函数。</p>
+<h4 id="hint">HINT</h4>
+<ul>
+<li><code>strbuf</code> 的成员 <code>len</code> 代表的是 <code>buf</code> 缓冲区的长度，每次我们将字符串追加入 <code>strbuf</code> 中，我们都应该使用 <code>strbuf_setlen()</code> 去更新 <code>strbuf</code> 的长度 <code>len</code>，注意 <code>123\0456</code> 的长度不是 3，而是 7。</li>
+<li><code>strbuf</code> 的成员 <code>alloc</code> 代表的是 <code>buf</code> 缓冲区的容量，也就是我们每次动态分配的数组大小，每当我们需要向 <code>sb</code> 内追加一个字符串，我们需要计算当前的字符串长度加上追加的字符串长度，如果超过了当前的容量，我们就需要把容量扩大一倍，然后将字符串添加进去。</li>
+</ul>
+<h4 id="part-2a">Part 2A</h4>
+<h5 id="task">TASK</h5>
+<p>实现字符串缓冲区类 <code>strbuf</code> 简单的初始化，填充，释放，交换，比较，清空等操作。</p>
+<p>具体 API 如下：</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>功能简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void strbuf_init(struct strbuf *sb, size_t alloc);</td>
+<td>初始化 <code>sb</code> 结构体，容量为 <code>alloc</code>。</td>
+</tr>
+<tr>
+<td>void strbuf_attach(struct strbuf <em>sb, void </em>str, size_t len, size_t alloc);</td>
+<td>将字符串填充到 <code>sb</code> 中，长度为 <code>len</code>, 容量为 <code>alloc</code>。</td>
+</tr>
+<tr>
+<td>void strbuf_release(struct strbuf *sb);</td>
+<td>释放 <code>sb</code> 结构体的内存。</td>
+</tr>
+<tr>
+<td>void strbuf_swap(struct strbuf <em>a, struct strbuf </em>b)</td>
+<td>交换两个 strbuf。</td>
+</tr>
+<tr>
+<td>char <em>strbuf_detach(struct strbuf </em>sb, size_t *sz);</td>
+<td>将 <code>sb</code> 中的原始内存取出，并将 <code>sz</code> 设置为其 <code>alloc</code> 大小 。</td>
+</tr>
+<tr>
+<td>int strbuf_cmp(const struct strbuf <em>first, const struct strbuf </em>second);</td>
+<td>比较两个 strbuf 的内存是否相同。</td>
+</tr>
+<tr>
+<td>void strbuf_reset(struct strbuf *sb);</td>
+<td>清空 <code>sb</code>。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="part-2b">Part 2B</h4>
+<h5 id="task_1">TASK</h5>
+<p>实现字符串缓冲区类 <code>strbuf</code> 扩容，(追加|插入)字符，字符串等操作。</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>功能简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void strbuf_grow(struct strbuf *sb, size_t extra);</td>
+<td>确保在 <code>len</code> 之后 <code>strbuf</code> 中至少有 <code>extra</code> 个字节的空闲空间可用。</td>
+</tr>
+<tr>
+<td>void strbuf_add(struct strbuf <em>sb, const void </em>data, size_t len);</td>
+<td>向 <code>sb</code> 追加长度为 <code>len</code> 的数据 <code>data</code>。</td>
+</tr>
+<tr>
+<td>void strbuf_addch(struct strbuf *sb, int c);</td>
+<td>向 <code>sb</code> 追加一个字符 <code>c</code>。</td>
+</tr>
+<tr>
+<td>void strbuf_addstr(struct strbuf <em>sb, const char </em>s);</td>
+<td>向 <code>sb</code> 追加一个字符串 <code>s</code>。</td>
+</tr>
+<tr>
+<td>void strbuf_addbuf(struct strbuf <em>sb, const struct strbuf </em>sb2);</td>
+<td>向一个 <code>sb</code> 追加另一个 <code>strbuf</code>的数据。</td>
+</tr>
+<tr>
+<td>void strbuf_setlen(struct strbuf *sb, size_t len);</td>
+<td>设置 <code>sb</code> 的长度 <code>len</code>。</td>
+</tr>
+<tr>
+<td>size_t strbuf_avail(const struct strbuf *sb)</td>
+<td>计算 <code>sb</code> 目前仍可以向后追加的字符串长度。</td>
+</tr>
+<tr>
+<td>void strbuf_insert(struct strbuf <em>sb, size_t pos, const void </em>data, size_t len);</td>
+<td>向 <code>sb</code> 内存坐标为 <code>pos</code> 位置插入长度为 <code>len</code> 的数据 <code>data</code>。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="part-2c">Part 2C</h4>
+<h5 id="task_2">TASK</h5>
+<p>实现字符串缓冲区类 <code>strbuf</code> 删除部分内容等功能。</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>功能简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void strbuf_ltrim(struct strbuf *sb);</td>
+<td>去除 <code>sb</code> 缓冲区左端的所有 空格，tab, '\t'。</td>
+</tr>
+<tr>
+<td>void strbuf_rtrim(struct strbuf *sb);</td>
+<td>去除 <code>sb</code> 缓冲区右端的所有 空格，tab, '\t'。</td>
+</tr>
+<tr>
+<td>void strbuf_remove(struct strbuf *sb, size_t pos, size_t len);</td>
+<td>删除 <code>sb</code> 缓冲区从 <code>pos</code> 坐标长度为 <code>len</code> 的内容。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="part-2d">Part 2D</h4>
+<ol>
+<li>
+<p>在我们使用 C FILE API 读取一个小文件的时候经常会有这样的一个困惑，我们为什么不能直接一次性读完整个文件到一个大缓冲区呢? 而 <code>fread</code> or <code>read</code> 总是用一个将一个文件中的内容反复读到一个缓冲区中，然后我们从这个缓冲区中取出内容, 但是为什么我们不能直接将一个文件读到一个缓冲区中呢?</p>
+</li>
+<li>
+<p>在我们想要从文件或者终端读取一行数据的时候经常有这样的疑惑，我应该用什么函数去读？C++ 的 <code>cin.getline()</code>? <code>C++</code> 的 <code>getline()</code>? C 的 <code>getline()</code>? Python 的 <code>readline()</code>? 正如 StackOverFlow 的网友的总结<a href="https://stackoverflow.com/questions/7868936/read-file-line-by-line-using-ifstream-in-c">stackoverflow</a>,c版本的 <code>getline()</code> 效率是最高的。那么问题来了, C 的 <code>getline()</code> 每次都得我去指定缓冲区和长度... 有什么好的方法让用户可以直接调用一个 <code>strbuf_getline()</code> 无脑的从缓冲区中拿到想要的内容呢？</p>
+</li>
+</ol>
+<h5 id="task_3">TASK</h5>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>功能简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ssize_t strbuf_read(struct strbuf *sb, int fd, size_t hint);</td>
+<td><code>sb</code> 增长 <code>hint ? hint : 8192</code> 大小， 然后将文件描述符为 <code>fd</code> 的所有文件内容追加到 <code>sb</code> 中。</td>
+</tr>
+<tr>
+<td>int strbuf_getline(struct strbuf <em>sb, FILE </em>fp);</td>
+<td>将 将文件句柄为 <code>fp</code> 的一行内容（抛弃换行符）读取到 <code>sb</code> 。</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="_3">无信用挑战练习</h4>
+<h5 id="challenge">CHALLENGE</h5>
+<ol>
+<li>实现字符串切割（C 系字符串函数的一个痛点）。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>功能简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>struct strbuf *<em>strbuf_split_buf(const char </em>str, size_t len, int terminator, int max);</td>
+<td>将长度为 <code>len</code> 的字符串 <code>str</code> 根据切割字符 <code>terminator</code> 切成多个 strbuf,并从结果返回，max 可以用来限定最大切割数量。返回 <code>struct strbuf</code> 的指针数组，数组的最后元素为 <code>NULL</code></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>实现判断一个 strbuf 是否以指定字符串开头的功能（C 系字符串函数的另一个痛点）。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>功能简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bool strbuf_begin_judge(char<em> target_str, const char</em> str, int strlen);</td>
+<td>target_str : 目标字符串，str : 前缀字符串，strlen : target_str 长度 ，前缀相同返回 true 失败返回 false</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>获取字符串从坐标 <code>[begin, end)</code> 的所有内容（可以分成引用和拷贝两个模式） 。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>功能简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>char<em> strbuf_get_mid_buf(char</em> target_buf, int begin, int end, int len);</td>
+<td>target_str : 目标字符串，begin : 开始下标，end 结束下标。len : target_buf的长度，参数不合法返回 NULL. 下标从0开始，[begin, end)区间。</td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+</tr>
+<tr>
+<td>#### 参考资料</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>[1] <a href="https://schacon.github.io/git/technical/api-strbuf.html">strbuf API</a>.</li>
+<li>[2] <a href="https://github.com/goldsborough/vector">goldsborough/vector</a>.</li>
+<li>[3] <a href="https://github.com/eteran/c-vector">eteran/c-vector</a>.</li>
+<li>[4] <a href="https://github.com/git/git/blob/master/strbuf.h">git/strbuf</a>.</li>
+<li>[5] <a href="https://github.com/redis/redis/blob/unstable/src/sds.h">redis/sds</a>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.bd41221c.min.js"></script>
+      
+    
+  </body>
+</html>
